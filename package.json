@@ -1,0 +1,21 @@
+{
+  "name": "calculator-api",
+  "version": "1.0.0",
+  "description": "Api to calculate values",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+
+  "author": "Moshood Sikiru",
+  "license": "MIT",
+
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.18.2"
+  },
+  
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
