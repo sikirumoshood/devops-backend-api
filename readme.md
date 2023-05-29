@@ -16,11 +16,6 @@ POST http://google.com/signup {email: sikirumoshood@gmail.com}
 
 GET http://google.com/users?userId=1223444&firstname=33345555
 
-TERMS
-
-Endpoint
-Url / URI
-Route
 
 ## HTTP STATUS CODE
 200 - Request OK
