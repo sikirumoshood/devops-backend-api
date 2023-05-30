@@ -30,7 +30,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deployed successfully'
-                
                 // Restart PM 2 app
               
             }
