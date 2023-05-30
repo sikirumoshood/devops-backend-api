@@ -20,10 +20,10 @@ pipeline {
                 dir('/home/projects/devops-backend-api'){
                     withCredentials([gitUsernamePassword(credentialsId: '93f07d36-e295-45b2-b015-840a32c40ab8')]) {
                        sh 'git stash && git pull origin main'
+                       
                        sh 'npm i'
                     }
                 }
-
             }
             
         }
@@ -31,7 +31,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deployed successfully'
-                
                 // Restart PM 2 app
               
             }
