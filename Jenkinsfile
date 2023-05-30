@@ -5,25 +5,37 @@ pipeline {
     
     stages {
         
-        stage('Prepare') {
+        stage('Checkout code') {
             steps {
-                echo 'Backend api prepare stage'
+                echo 'Prepare for checkout'
+
                 sh 'node -v'
                 sh 'npm -v'
+
+                echo 'Checking out code'
+
+                dir('/home/checkouts'){
+                    checkout scm
+
+                    withCredentials([gitUsernamePassword(credentialsId: '93f07d36-e295-45b2-b015-840a32c40ab8')]) {
+                        sh 'git stash && git pull origin ${env.BRANCH_NAME}'
+                        sh 'npm i'
+                    }
+
+                        publishChecks name: 'Install dependencies', title: 'Install dependencies', summary: 'Installed successfully',
+        text: 'you can publish checks in pipeline script'
+
+                }
             }
         }
         
         stage('Build') {
             steps {
-                echo 'Backend api preparing build stage'
+                echo 'Building code'
 
-                dir('/home/projects/devops-backend-api'){
-                        withCredentials([gitUsernamePassword(credentialsId: '93f07d36-e295-45b2-b015-840a32c40ab8')]) {
-                            sh 'git stash && git pull origin'
-                            sh 'npm i'
-                        }
-
-                        publishChecks name: 'Install dependencies', title: 'Install dependencies', summary: 'Installed successfully',
+                dir('/home/checkouts/devops-backend-api'){
+                        sh 'npm start'
+                        publishChecks name: 'Build', title: 'Build', summary: 'Project built successfully',
         text: 'you can publish checks in pipeline script'
 
                 }
@@ -32,13 +44,18 @@ pipeline {
         }
         
         stage('Deploy') {
-            steps {
-                echo 'Deployed successfully'
-                publishChecks name: 'Deploy code', title: 'Deploy code', summary: 'Installed successfully',
-    text: 'you can publish checks in pipeline script'
-                // Restart PM 2 app
+            if (BRANCH_NAME == 'main' || BRANCH_NAME == 'dev') {
+                steps {
+                    echo 'Deploying code'publishChecks name: 'Deploy code', title: 'Deploy code', summary: 'Code deployed successfully',
+        text: 'you can publish checks in pipeline script'
+                    // Resta
+                    // rt PM 2 app
               
+                }
+            } else {
+                echo 'Skipping deployment'
             }
+            
         }
         
     }
