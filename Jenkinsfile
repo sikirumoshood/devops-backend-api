@@ -15,17 +15,11 @@ pipeline {
         
         stage('Build') {
             steps {
-                echo 'Backend api preparing build stage'
-
-                dir('/home/projects/devops-backend-api'){
-                    withCredentials([gitUsernamePassword(credentialsId: '93f07d36-e295-45b2-b015-840a32c40ab8')]) {
-                       sh 'git stash && git pull origin main'
-                       sh 'npm i'
-                    }
+                echo 'Checking out code'
+                dir('/devops-backend-api'){
+                    sh 'ls'
                 }
-
             }
-            
         }
         
         stage('Deploy') {
