@@ -16,6 +16,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Checking out code'
+                
                 dir('/devops-backend-api'){
                     sh 'ls'
                 }
