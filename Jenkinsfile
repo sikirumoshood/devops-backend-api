@@ -13,8 +13,10 @@ pipeline {
                 sh 'npm -v'
 
                 echo 'Checking out code'
+                echo '${env.GIT_URL}'
 
                 dir('/home/checkouts'){
+                
                     withCredentials([gitUsernamePassword(credentialsId: '93f07d36-e295-45b2-b015-840a32c40ab8')]) {
                         sh 'git clone ${env.GIT_URL}'
                     }
