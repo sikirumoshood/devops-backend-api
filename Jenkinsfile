@@ -49,7 +49,8 @@ pipeline {
             }
             
             steps {
-                    echo 'Deploying code'publishChecks name: 'Deploy code', title: 'Deploy code', summary: 'Code deployed successfully',
+                    echo 'Deploying code'
+                    publishChecks name: 'Deploy code', title: 'Deploy code', summary: 'Code deployed successfully',
         text: 'you can publish checks in pipeline script'
                     // Resta
                     // rt PM 2 app
