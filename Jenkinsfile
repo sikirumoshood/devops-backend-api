@@ -44,19 +44,19 @@ pipeline {
         }
         
         stage('Deploy') {
-            if (BRANCH_NAME == 'main' /*|| BRANCH_NAME == 'dev'*/) {
-                steps {
+            when {
+                branch 'main'
+            }
+            
+            steps {
                     echo 'Deploying code'publishChecks name: 'Deploy code', title: 'Deploy code', summary: 'Code deployed successfully',
         text: 'you can publish checks in pipeline script'
                     // Resta
                     // rt PM 2 app
               
-                }
-            } else {
-                echo 'Skipping deployment'
             }
-
         }
+
         
     }
 }
