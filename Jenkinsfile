@@ -31,6 +31,8 @@ pipeline {
             steps {
                 echo 'Building code'
 
+                echo env.BRANCH_NAME
+                
                 dir('/home/checkouts/devops-backend-api'){
                     sh 'git fetch origin && git checkout ${env.BRANCH_NAME}'
                     sh 'npm i'
