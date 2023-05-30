@@ -22,7 +22,7 @@ pipeline {
                         sh 'npm i'
                     }
 
-                        publishChecks name: 'Install dependencies', title: 'Install dependencies', summary: 'Installed successfully',
+                    publishChecks name: 'Install dependencies', title: 'Install dependencies', summary: 'Dependencies intalled successfully',
         text: 'you can publish checks in pipeline script'
 
                 }
@@ -34,8 +34,8 @@ pipeline {
                 echo 'Building code'
 
                 dir('/home/checkouts/devops-backend-api'){
-                        sh 'npm start'
-                        publishChecks name: 'Build', title: 'Build', summary: 'Project built successfully',
+                    sh 'npm start'
+                    publishChecks name: 'Build', title: 'Build', summary: 'Project built successfully',
         text: 'you can publish checks in pipeline script'
 
                 }
@@ -44,7 +44,7 @@ pipeline {
         }
         
         stage('Deploy') {
-            if (BRANCH_NAME == 'main' || BRANCH_NAME == 'dev') {
+            if (BRANCH_NAME == 'main' /*|| BRANCH_NAME == 'dev'*/) {
                 steps {
                     echo 'Deploying code'publishChecks name: 'Deploy code', title: 'Deploy code', summary: 'Code deployed successfully',
         text: 'you can publish checks in pipeline script'
@@ -55,7 +55,7 @@ pipeline {
             } else {
                 echo 'Skipping deployment'
             }
-            
+
         }
         
     }
