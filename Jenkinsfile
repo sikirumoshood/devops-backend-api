@@ -15,14 +15,11 @@ pipeline {
                 echo 'Checking out code'
 
                 dir('/home/checkouts'){
-                    checkout scm
-
                     withCredentials([gitUsernamePassword(credentialsId: '93f07d36-e295-45b2-b015-840a32c40ab8')]) {
-                        sh 'git stash && git pull origin ${env.BRANCH_NAME}'
-                        sh 'npm i'
+                        sh 'git clone ${env.GIT_URL}'
                     }
 
-                    publishChecks name: 'Install dependencies', title: 'Install dependencies', summary: 'Dependencies intalled successfully',
+                    publishChecks name: 'Checkout code', title: 'Checkout code', summary: 'Checkout successful',
         text: 'you can publish checks in pipeline script'
 
                 }
@@ -34,6 +31,8 @@ pipeline {
                 echo 'Building code'
 
                 dir('/home/checkouts/devops-backend-api'){
+                    sh 'git fetch origin && git checkout ${env.BRANCH_NAME}'
+                    sh 'npm i'
                     sh 'npm start'
                     publishChecks name: 'Build', title: 'Build', summary: 'Project built successfully',
         text: 'you can publish checks in pipeline script'
@@ -41,6 +40,18 @@ pipeline {
                 }
             }
             
+        }
+
+        stage('Clean up') {
+            steps {
+                echo 'Cleaning up folder'
+
+                dir('/home/checkouts/devops-backend-api'){
+                    sh 'rm -r devops-backend-api'
+                }
+
+                echo 'Clean up completed successfully'
+            }
         }
         
         stage('Deploy') {
