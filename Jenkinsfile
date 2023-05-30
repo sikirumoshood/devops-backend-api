@@ -18,14 +18,14 @@ pipeline {
                 echo 'Backend api preparing build stage'
 
                 dir('/home/projects/devops-backend-api'){
-                    withCredentials([gitUsernamePassword(credentialsId: '93f07d36-e295-45b2-b015-840a32c40ab8')]) {
-                       sh 'git stash && git pull origin main'
+                        withCredentials([gitUsernamePassword(credentialsId: '93f07d36-e295-45b2-b015-840a32c40ab8')]) {
+                            sh 'git stash && git pull origin unkown'
+                            sh 'npm i'
+                        }
 
-                       sh 'npm i'
-                    }
+                        publishChecks name: 'Install dependencies', title: 'Install dependencies', summary: 'Installed successfully',
+        text: 'you can publish checks in pipeline script'
 
-                    publishChecks name: 'Install dependencies', title: 'Install dependencies', summary: 'Installed successfully',
-    text: 'you can publish checks in pipeline script'
                 }
             }
             
