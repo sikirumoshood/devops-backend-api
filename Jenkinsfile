@@ -34,8 +34,7 @@ pipeline {
                 echo "Building branch ${env.BRANCH_NAME}"
 
                 dir('/home/checkouts/devops-backend-api'){
-                    echo 'Test pwd'
-
+                    sh 'ls'
                     sh 'git fetch --all'
                     sh "git branch -a && git checkout remotes/origin/${env.BRANCH_NAME}"
                     sh 'npm i'
