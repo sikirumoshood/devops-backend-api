@@ -48,7 +48,7 @@ pipeline {
             steps {
                 dir('/home/checkouts'){
 
-                    echo 'Cleaning up folder'
+                    echo 'Cleaning up checkout folders'
                     sh 'ls && pwd'
                     sh 'rm -r devops-backend-api'
                 }
