@@ -6,11 +6,26 @@ pipeline {
     }
 
     stages {
+
+        stage('Prepare') {
+
+          steps{
+            echo 'Branch to deploye'
+
+            echo env.BRANCH_NAME
+            echo env.GIT_BRANCH
+          }
+
+        }
+        
         stage('Deploy') {
-            when {
-                branch 'main'
-            }
             
+            when {
+              expression {
+                env.BRANCH_NAME == 'main' || env.GIT_BRANCH == 'origin/main'
+              }
+            }
+
             steps {
                     echo 'Deploying code'
                     dir('/home/projects/devops-backend-api'){
