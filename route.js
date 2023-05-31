@@ -32,7 +32,7 @@ const users = [
     firstName: "Nadia",
     lastName: "Bashir",
     email: "nd@gmal.com",
-    password: "password-nadia"
+    password: "password-nadi2"
   },
 ]
 
