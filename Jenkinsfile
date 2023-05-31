@@ -18,6 +18,8 @@ pipeline {
 
                     withCredentials([gitUsernamePassword(credentialsId: '93f07d36-e295-45b2-b015-840a32c40ab8')]) {
                         checkout scm
+                        echo 'Checkout completed'
+                        echo 'ls'
                     }
 
                     publishChecks name: 'Checkout code', title: 'Checkout code', summary: 'Checkout successful',
@@ -40,7 +42,7 @@ pipeline {
                     sh 'npm test'
 
                     echo 'Cleaning up'
-                    sh 'rm -r *'
+                    sh 'cd .. && rm -r devops-backend-api'
 
                     publishChecks name: 'Test', title: 'Test', summary: 'Test completed',
         text: 'you can publish checks in pipeline script'
