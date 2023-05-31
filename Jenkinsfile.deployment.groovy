@@ -6,11 +6,19 @@ pipeline {
     }
 
     stages {
-        stage('Deploy') {
+
+        stage('Prepare') {
+
+          steps{
             echo 'Branch to deploye'
 
             echo env.BRANCH_NAME
             echo env.GIT_BRANCH
+          }
+
+        }
+        
+        stage('Deploy') {
             
             when {
               expression {
