@@ -27,7 +27,7 @@ pipeline {
             }
         }
         
-        stage('Build') {
+        stage('Test') {
             steps {
                 echo "Building branch ${env.GIT_BRANCH}"
 
@@ -35,8 +35,8 @@ pipeline {
                     sh 'git fetch --all'
                     sh "git branch -a && git checkout remotes/origin/${env.GIT_BRANCH}"
                     sh 'npm i'
-                    sh 'npm start && .exit'
-                    publishChecks name: 'Build', title: 'Build', summary: 'Project built successfully',
+                    sh 'npm test'
+                    publishChecks name: 'Test', title: 'Test', summary: 'Test completed',
         text: 'you can publish checks in pipeline script'
 
                 }
@@ -48,7 +48,7 @@ pipeline {
             steps {
                 echo 'Cleaning up folder'
 
-                dir('/home/checkouts/devops-backend-api'){
+                dir('/home/checkouts'){
                     sh 'rm -r devops-backend-api'
                 }
 
