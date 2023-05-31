@@ -51,12 +51,14 @@ pipeline {
         }
 
         stage('Clean up') {
-            echo 'Cleaning up'
+            steps {
+                echo 'Cleaning up'
 
-            dir('/home/checkouts'){
-                sh 'ls -a'
-                sh 'rm -r devops-backend-api'
-                echo 'Clean up completed successfully'
+                dir('/home/checkouts'){
+                    sh 'ls -a'
+                    sh 'rm -r devops-backend-api'
+                    echo 'Clean up completed successfully'
+                }
             }
         }
         
