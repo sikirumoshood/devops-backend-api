@@ -29,7 +29,7 @@ pipeline {
         
         stage('Build') {
             steps {
-                echo "Building branch ${env.BRANCH_NAME}"
+                echo "Building branch ${env.GIT_BRANCH}"
 
                 dir('/home/checkouts/devops-backend-api'){
                     sh "git fetch origin && git checkout ${env.BRANCH_NAME}"
