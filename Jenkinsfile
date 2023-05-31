@@ -32,8 +32,8 @@ pipeline {
                 echo "Building branch ${env.GIT_BRANCH}"
 
                 dir('/home/checkouts/devops-backend-api'){
-                    sh 'git fetch origin'
-                    sh "git branch && git checkout ${env.GIT_BRANCH}"
+                    sh 'git fetch --all'
+                    sh "git branch -a && git checkout ${env.GIT_BRANCH}"
                     sh 'npm i'
                     sh 'npm start'
                     publishChecks name: 'Build', title: 'Build', summary: 'Project built successfully',
