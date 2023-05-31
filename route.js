@@ -26,6 +26,14 @@ const users = [
     email: "sofia@gmal.com",
     password: "password"
   },
+
+  {
+    id: 444,
+    firstName: "Nadia",
+    lastName: "Bashir",
+    email: "nd@gmal.com",
+    password: "password"
+  },
 ]
 
 router.get('/', (req, res) => {
