@@ -14,8 +14,8 @@ pipeline {
 
                 echo 'Checking out code'
                 
-                dir('/home/checkouts'){
-                    
+                dir('/home/checkouts/devops-backend-api'){
+
                     withCredentials([gitUsernamePassword(credentialsId: '93f07d36-e295-45b2-b015-840a32c40ab8')]) {
                         checkout scm
                     }
