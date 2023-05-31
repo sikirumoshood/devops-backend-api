@@ -29,10 +29,10 @@ pipeline {
         
         stage('Build') {
             steps {
-                echo 'Building branch ${env.BRANCH_NAME}'
+                echo "Building branch ${env.BRANCH_NAME}"
 
                 dir('/home/checkouts/devops-backend-api'){
-                    sh 'git fetch origin && git checkout ${env.BRANCH_NAME}'
+                    sh "git fetch origin && git checkout ${env.BRANCH_NAME}"
                     sh 'npm i'
                     sh 'npm start'
                     publishChecks name: 'Build', title: 'Build', summary: 'Project built successfully',
