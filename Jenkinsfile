@@ -49,7 +49,7 @@ pipeline {
                 dir('/home/checkouts'){
 
                     echo 'Cleaning up folder'
-                    sh 'ls'
+                    sh 'ls && pwd'
                     sh 'rm -r devops-backend-api'
                 }
 
