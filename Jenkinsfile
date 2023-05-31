@@ -45,18 +45,6 @@ pipeline {
                 }
             }
         }
-
-        stage('Clean up') {
-            steps {
-                echo 'Cleaning up'
-
-                dir('/home/checkouts'){
-                    sh 'ls -a'
-                    sh 'rm -r devops-backend-api'
-                    echo 'Clean up completed successfully'
-                }
-            }
-        }
         
         stage('Deploy') {
             when {
