@@ -5,36 +5,66 @@ pipeline {
     
     stages {
         
-        stage('Prepare') {
+        stage('Checkout code') {
             steps {
-                echo 'Backend api prepare stage'
+                echo 'Prepare for checkout'
+
                 sh 'node -v'
                 sh 'npm -v'
-            }
-        }
-        
-        stage('Build') {
-            steps {
-                echo 'Backend api preparing build stage'
 
-                dir('/home/projects/devops-backend-api'){
+                echo 'Checking out code'
+                
+                dir('/home/checkouts/devops-backend-api'){
+
                     withCredentials([gitUsernamePassword(credentialsId: '93f07d36-e295-45b2-b015-840a32c40ab8')]) {
-                       sh 'git stash && git pull origin main'
-                       
-                       sh 'npm i'
+                        checkout scm
+                        echo 'Checkout completed'
+                        echo 'ls'
                     }
+
+                    publishChecks name: 'Checkout code', title: 'Checkout code', summary: 'Checkout successful',
+        text: 'you can publish checks in pipeline script'
+
                 }
             }
-            
+        }
+         
+        stage('Test') {
+            steps {
+                echo "Building branch ${env.BRANCH_NAME}"
+
+                dir('/home/checkouts/devops-backend-api'){
+                    sh 'ls'
+                    sh 'git fetch --all'
+                    sh "git branch -a && git checkout remotes/origin/${env.BRANCH_NAME}"
+                    sh 'npm i'
+                    sh 'npm test'
+
+                    publishChecks name: 'Test', title: 'Test', summary: 'Test completed',
+        text: 'you can publish checks in pipeline script'
+                }
+            }
         }
         
         stage('Deploy') {
+            when {
+                branch 'main'
+            }
+            
             steps {
-                echo 'Deployed successfully'
-                // Restart PM 2 app
+                    echo 'Deploying code'
+                    dir('/home/projects/devops-backend-api'){
+
+                        withCredentials([gitUsernamePassword(credentialsId: '93f07d36-e295-45b2-b015-840a32c40ab8')]) {
+                            sh 'git stash && git pull origin main'
+                        }
+
+                        publishChecks name: 'Deploy code', title: 'Deploy code', summary: 'Code deployed successfully',
+            text: 'you can publish checks in pipeline script'
+
+                }
               
             }
         }
-        
     }
 }
