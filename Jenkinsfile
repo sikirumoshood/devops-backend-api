@@ -35,7 +35,7 @@ pipeline {
                     sh 'git fetch --all'
                     sh "git branch -a && git checkout remotes/origin/${env.GIT_BRANCH}"
                     sh 'npm i'
-                    sh 'npm start'
+                    sh 'npm start && .exit'
                     publishChecks name: 'Build', title: 'Build', summary: 'Project built successfully',
         text: 'you can publish checks in pipeline script'
 
