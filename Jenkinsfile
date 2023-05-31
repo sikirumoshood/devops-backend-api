@@ -33,7 +33,7 @@ pipeline {
 
                 dir('/home/checkouts/devops-backend-api'){
                     sh 'git fetch --all'
-                    sh "git branch -a && git checkout ${env.GIT_BRANCH}"
+                    sh "git branch -a && git checkout remotes/origin/${env.GIT_BRANCH}"
                     sh 'npm i'
                     sh 'npm start'
                     publishChecks name: 'Build', title: 'Build', summary: 'Project built successfully',
