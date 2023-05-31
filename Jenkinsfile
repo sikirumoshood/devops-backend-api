@@ -41,9 +41,6 @@ pipeline {
                     sh 'npm i'
                     sh 'npm test'
 
-                    
-                    sh 'cd .. && rm -r devops-backend-api'
-
                     publishChecks name: 'Test', title: 'Test', summary: 'Test completed',
         text: 'you can publish checks in pipeline script'
                 }
