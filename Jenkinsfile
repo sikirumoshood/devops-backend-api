@@ -41,12 +41,22 @@ pipeline {
                     sh 'npm i'
                     sh 'npm test'
 
-                    echo 'Cleaning up'
+                    
                     sh 'cd .. && rm -r devops-backend-api'
 
                     publishChecks name: 'Test', title: 'Test', summary: 'Test completed',
         text: 'you can publish checks in pipeline script'
                 }
+            }
+        }
+
+        stage('Clean up') {
+            echo 'Cleaning up'
+
+            dir('/home/checkouts'){
+                sh 'ls -a'
+                sh 'rm -r devops-backend-api'
+                echo 'Clean up completed successfully'
             }
         }
         
