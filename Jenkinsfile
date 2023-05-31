@@ -28,7 +28,7 @@ pipeline {
                 }
             }
         }
-        
+         
         stage('Test') {
             steps {
                 echo "Building branch ${env.BRANCH_NAME}"
