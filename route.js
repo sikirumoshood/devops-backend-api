@@ -32,7 +32,7 @@ const users = [
     firstName: "Nadia",
     lastName: "Bashir",
     email: "nd@gmal.com",
-    password: "password-nadi2"
+    password: "password-new"
   },
 
   {
@@ -73,12 +73,10 @@ router.post('/auth/login', (req, res) => {
   const user = users.find((user) => user.email === email)
 
   if(!user){
-    console.log('::::User not found')
     return res.status(401).json({success:false, message: 'Invalid email or password'})
   }
 
   if(user.password !== password){
-    console.log(':::Invalid password')
     return res.status(401).json({success:false, message: 'Invalid login credentials'})
   }
 
