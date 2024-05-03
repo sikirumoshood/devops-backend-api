@@ -11,5 +11,5 @@ test('It should pass 3', () => {
 });
 
 test('It should pass 4', () => {
-  expect(true)
+  expect(true).toBe(false)
 });
